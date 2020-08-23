@@ -94,7 +94,7 @@ namespace TicTacToe
 
         public bool DoMoveIfValid(IMove move)
         {
-            if (!move.IsValid(this)) return false;
+            if (move == null || !move.IsValid(this)) return false;
 
             move.Execute(this);
             return true;
