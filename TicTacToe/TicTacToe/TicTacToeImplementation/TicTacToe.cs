@@ -118,18 +118,6 @@ namespace TicTacToe
             }
             return false;
         }
-        public int ValidMoves()
-        {
-            int moves = 0;
-            for (int x = 0; x < BoardSize; x++)
-            {
-                for (int y = 0; y < BoardSize; y++)
-                {
-                    if (Board[x, y] == ' ') moves++;
-                }
-            }
-            return moves;
-        }
 
         public List<IMove> GetValidMoves(char player)
         {
