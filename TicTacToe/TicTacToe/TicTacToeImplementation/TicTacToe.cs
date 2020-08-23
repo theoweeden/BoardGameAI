@@ -71,6 +71,10 @@ namespace TicTacToe
             return winStates;
         }
 
+        public bool isWon()
+        {
+            return isWon('O') || isWon('X');
+        }
         public bool isWon(char player)
         {
             return winStates.Any(i => i.All(j => Board[j.x, j.y] == player));
@@ -94,7 +98,7 @@ namespace TicTacToe
 
         public bool ValidMovesExist()
         {
-            if (isWon('O') || isWon('X')) return false;
+            if (isWon()) return false;
 
             if (GetValidMoves('O').Any() || GetValidMoves('X').Any()) return true;
 

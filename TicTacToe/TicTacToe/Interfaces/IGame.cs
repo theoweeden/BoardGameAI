@@ -6,6 +6,7 @@ namespace TicTacToe
     {
         public char[,] Board { get; set; }
 
+        public bool isWon();
         public bool isWon(char player);
         public int Evaluate(char player);
         public char getOtherPlayer(char player);
