@@ -26,9 +26,9 @@ namespace TicTacToe
                         Console.WriteLine("Choose the Y coordinate for your move:");
                     } while (!Int32.TryParse(Console.ReadLine(), out y));
 
-                } while (!t.DoMoveIfValid(new TicTacToeMove(new Coords(x, y), player)));
+                } while (!(new TicTacToeMove(new Coords(x, y), player).Execute(t)));
 
-                t.DoMoveIfValid(AI.CalcNextMove(t, opponent, opponent, 9).move);
+                AI.CalcNextMove(t, opponent, opponent, 9).move.Execute(t);
             }
 
             Console.WriteLine(t.ToString());

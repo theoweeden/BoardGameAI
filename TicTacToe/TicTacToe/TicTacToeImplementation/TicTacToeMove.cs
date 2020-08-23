@@ -15,9 +15,12 @@ namespace TicTacToe
             Player = player;
         }
 
-        public void Execute(IGame game)
+        public bool Execute(IGame game)
         {
+            if (!IsValid(game)) return false;
+            
             game.Board[Coords.x, Coords.y] = Player;
+            return true;
         }
         public void Undo(IGame game)
         {
