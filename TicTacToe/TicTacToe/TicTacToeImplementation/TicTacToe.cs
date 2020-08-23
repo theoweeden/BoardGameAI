@@ -109,13 +109,8 @@ namespace TicTacToe
         {
             if (isWon('O') || isWon('X')) return false;
 
-            for (int x = 0; x < BoardSize; x++)
-            {
-                for (int y = 0; y < BoardSize; y++)
-                {
-                    if (Board[x, y] == ' ') return true;
-                }
-            }
+            if (GetValidMoves('O').Any() || GetValidMoves('X').Any()) return true;
+
             return false;
         }
 
