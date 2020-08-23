@@ -12,7 +12,7 @@ namespace TicTacToe
             char player = 'X';
             char opponent = t.getOtherPlayer(player);
             int x, y;
-            while (!t.isWon('X') && !t.isWon('O') && !t.isWon() && t.GetValidMoves(player).Any())
+            while (!t.IsWon('X') && !t.IsWon('O') && !t.IsWon() && t.GetValidMoves(player).Any())
             {
                 Console.WriteLine(t.ToString());
                 do

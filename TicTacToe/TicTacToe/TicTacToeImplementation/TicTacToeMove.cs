@@ -28,7 +28,7 @@ namespace TicTacToe
         }
         public bool IsValid(IGame game)
         {
-            return !(game.isWon('O') || game.isWon('X') || Coords == null || Coords.x > 2 || Coords.y > 2 || game.Board[Coords.x, Coords.y] != ' ');
+            return !(game.IsWon('O') || game.IsWon('X') || Coords == null || Coords.x > 2 || Coords.y > 2 || game.Board[Coords.x, Coords.y] != ' ');
         }
     }
 }

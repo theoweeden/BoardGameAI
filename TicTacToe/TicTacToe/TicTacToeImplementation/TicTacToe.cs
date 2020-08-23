@@ -71,11 +71,11 @@ namespace TicTacToe
             return winStates;
         }
 
-        public bool isWon()
+        public bool IsWon()
         {
-            return isWon('O') || isWon('X');
+            return IsWon('O') || IsWon('X');
         }
-        public bool isWon(char player)
+        public bool IsWon(char player)
         {
             return winStates.Any(i => i.All(j => Board[j.x, j.y] == player));
         }

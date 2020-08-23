@@ -9,7 +9,7 @@ namespace TicTacToe
     {
         public static (IMove move, int score) CalcNextMove(IGame game, char player, char original, int ply)
         {
-            if (ply == 0 || game.isWon() || !game.GetValidMoves(player).Any())
+            if (ply == 0 || game.IsWon() || !game.GetValidMoves(player).Any())
             {
                 return (null, game.Evaluate(original));
             }

@@ -6,8 +6,8 @@ namespace TicTacToe
     {
         public char[,] Board { get; set; }
 
-        public bool isWon();
-        public bool isWon(char player);
+        public bool IsWon();
+        public bool IsWon(char player);
         public int Evaluate(char player);
         public char getOtherPlayer(char player);
         public List<IMove> GetValidMoves(char player);
