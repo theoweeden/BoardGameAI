@@ -100,11 +100,6 @@ namespace TicTacToe
             return true;
         }
 
-        public bool IsMoveValid(IMove move)
-        {
-            return move.IsValid(this);
-        }
-
         public bool ValidMovesExist()
         {
             if (isWon('O') || isWon('X')) return false;
