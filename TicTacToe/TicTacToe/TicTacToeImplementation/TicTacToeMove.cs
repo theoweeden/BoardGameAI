@@ -17,18 +17,24 @@ namespace TicTacToe
 
         public bool Execute(IGame game)
         {
-            if (!IsValid(game)) return false;
-            
-            game.Board[Coords.x, Coords.y] = Player;
+            if (!(game is TicTacToe) || !IsValid(game)) return false;
+
+            var tictactoe = game as TicTacToe;
+            tictactoe.Board[Coords.x, Coords.y] = Player;
             return true;
         }
         public void Undo(IGame game)
         {
-            game.Board[Coords.x, Coords.y] = ' ';
+            if (!(game is TicTacToe)) return;
+
+            var tictactoe = game as TicTacToe;
+            tictactoe.Board[Coords.x, Coords.y] = ' ';
         }
         public bool IsValid(IGame game)
         {
-            return !(game.IsWon('O') || game.IsWon('X') || Coords == null || Coords.x > 2 || Coords.y > 2 || game.Board[Coords.x, Coords.y] != ' ');
+            if (!(game is TicTacToe)) return false;
+            var tictactoe = game as TicTacToe;
+            return !(tictactoe.IsWon('O') || tictactoe.IsWon('X') || Coords == null || Coords.x > 2 || Coords.y > 2 || tictactoe.Board[Coords.x, Coords.y] != ' ');
         }
     }
 }

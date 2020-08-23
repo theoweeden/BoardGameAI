@@ -4,8 +4,6 @@ namespace TicTacToe
 {
     interface IGame
     {
-        public char[,] Board { get; set; }
-
         public bool IsWon();
         public bool IsWon(char player);
         public int Evaluate(char player);
