@@ -131,6 +131,20 @@ namespace TicTacToe
             return moves;
         }
 
+        public List<IMove> GetValidMoves(char player)
+        {
+            var moves = new List<IMove>();
+            for (int x = 0; x < BoardSize; x++)
+            {
+                for (int y = 0; y < BoardSize; y++)
+                {
+                    var move = new TicTacToeMove(new Coords(x, y), player);
+                    if (move.IsValid(this)) moves.Add(move);
+                }
+            }
+            return moves;
+        }
+
         public override string ToString()
         {
             var sb = new StringBuilder();
