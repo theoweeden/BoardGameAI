@@ -28,7 +28,7 @@ namespace TicTacToe
 
                 } while (!t.DoMoveIfValid(new TicTacToeMove(new Coords(x, y), player)));
 
-                t.DoMoveIfValid(new TicTacToeMove(AI.CalcNextMove(t, opponent, opponent, 9).move, opponent));
+                t.DoMoveIfValid(AI.CalcNextMove(t, opponent, opponent, 9).move);
             }
 
             Console.WriteLine(t.ToString());
