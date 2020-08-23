@@ -83,10 +83,10 @@ namespace TicTacToe
         public int Evaluate(char player)
         {
             return winStates.Where(i=> (i.Count(j => Board[j.x, j.y] == player) + i.Count(j => Board[j.x, j.y] == ' ')) == 3).Sum(i => (int)Math.Pow(heuristicMultiplier, i.Count(j => Board[j.x, j.y] == player)))
-                - winStates.Where(i => i.Count(j => Board[j.x, j.y] == getOtherPlayer(player)) + i.Count(j => Board[j.x, j.y] == ' ') == 3).Sum(i => (int)Math.Pow(heuristicMultiplier, i.Count(j => Board[j.x, j.y] == getOtherPlayer(player))));
+                - winStates.Where(i => i.Count(j => Board[j.x, j.y] == NextPlayer(player)) + i.Count(j => Board[j.x, j.y] == ' ') == 3).Sum(i => (int)Math.Pow(heuristicMultiplier, i.Count(j => Board[j.x, j.y] == NextPlayer(player))));
         }
 
-        public char getOtherPlayer(char player)
+        public char NextPlayer(char player)
         {
             return player switch
             {

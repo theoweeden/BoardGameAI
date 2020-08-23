@@ -22,7 +22,7 @@ namespace TicTacToe
                 if (move.IsValid(game))
                 {
                     move.Execute(game);
-                    var (_, score) = CalcNextMove(game, game.getOtherPlayer(player), original, ply - 1);
+                    var (_, score) = CalcNextMove(game, game.NextPlayer(player), original, ply - 1);
                     move.Undo(game);
 
                     if (best.move == null) best = (move, score);
