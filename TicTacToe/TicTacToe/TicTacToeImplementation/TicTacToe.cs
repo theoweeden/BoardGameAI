@@ -96,15 +96,6 @@ namespace TicTacToe
             };
         }
 
-        public bool ValidMovesExist()
-        {
-            if (isWon()) return false;
-
-            if (GetValidMoves('O').Any() || GetValidMoves('X').Any()) return true;
-
-            return false;
-        }
-
         public List<IMove> GetValidMoves(char player)
         {
             var moves = new List<IMove>();

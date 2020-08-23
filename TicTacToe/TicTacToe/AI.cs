@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace TicTacToe
@@ -8,7 +9,7 @@ namespace TicTacToe
     {
         public static (IMove move, int score) CalcNextMove(IGame game, char player, char original, int ply)
         {
-            if (ply == 0 || !game.ValidMovesExist())
+            if (ply == 0 || game.isWon() || !game.GetValidMoves(player).Any())
             {
                 return (null, game.Evaluate(original));
             }

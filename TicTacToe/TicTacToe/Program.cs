@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace TicTacToe
 {
@@ -11,7 +12,7 @@ namespace TicTacToe
             char player = 'X';
             char opponent = t.getOtherPlayer(player);
             int x, y;
-            while (!t.isWon('X') && !t.isWon('O') && t.ValidMovesExist())
+            while (!t.isWon('X') && !t.isWon('O') && !t.isWon() && t.GetValidMoves(player).Any())
             {
                 Console.WriteLine(t.ToString());
                 do
@@ -28,7 +29,8 @@ namespace TicTacToe
 
                 } while (!(new TicTacToeMove(new Coords(x, y), player).Execute(t)));
 
-                AI.CalcNextMove(t, opponent, opponent, 9).move.Execute(t);
+                var move = AI.CalcNextMove(t, opponent, opponent, 9).move;
+                if(move != null)move.Execute(t);
             }
 
             Console.WriteLine(t.ToString());
