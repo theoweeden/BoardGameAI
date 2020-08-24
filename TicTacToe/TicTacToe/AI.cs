@@ -7,7 +7,12 @@ namespace TicTacToe
 {
     class AI
     {
-        public static (IMove move, int score) CalcNextMove(IGame game, char player, char original, int ply)
+        public static (IMove move, int score) CalcNextMove(IGame game, char player)
+        {
+            return MiniMax(game, player, player, 9);
+        }
+
+        public static (IMove move, int score) MiniMax(IGame game, char player, char original, int ply)
         {
             if (ply == 0 || game.IsWon() || !game.GetValidMoves(player).Any())
             {
@@ -22,7 +27,7 @@ namespace TicTacToe
                 if (move.IsValid(game))
                 {
                     move.Execute(game);
-                    var (_, score) = CalcNextMove(game, game.NextPlayer(player), original, ply - 1);
+                    var (_, score) = MiniMax(game, game.NextPlayer(player), original, ply - 1);
                     move.Undo(game);
 
                     if (best.move == null) best = (move, score);

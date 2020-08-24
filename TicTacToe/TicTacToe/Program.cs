@@ -29,7 +29,7 @@ namespace TicTacToe
 
                 } while (!(new TicTacToeMove(new Coords(x, y), player).Execute(t)));
 
-                var move = AI.CalcNextMove(t, opponent, opponent, 9).move;
+                var move = AI.CalcNextMove(t, opponent).move;
                 if(move != null)move.Execute(t);
             }
 
