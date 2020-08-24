@@ -9,10 +9,10 @@ namespace TicTacToe
     {
         public static (IMove move, int score) CalcNextMove(IGame game, char player)
         {
-            return MiniMax(game, player, player, 9);
+            return AlphaBeta(game, player, player, 9, -100000000, 100000000);
         }
 
-        public static (IMove move, int score) MiniMax(IGame game, char player, char original, int ply)
+        public static (IMove move, int score) AlphaBeta(IGame game, char player, char original, int ply, int alpha, int beta)
         {
             if (ply == 0 || game.IsWon() || !game.GetValidMoves(player).Any())
             {
@@ -27,7 +27,7 @@ namespace TicTacToe
                 if (move.IsValid(game))
                 {
                     move.Execute(game);
-                    var (_, score) = MiniMax(game, game.NextPlayer(player), original, ply - 1);
+                    var (_, score) = AlphaBeta(game, game.NextPlayer(player), original, ply - 1, alpha, beta);
                     move.Undo(game);
 
                     if (best.move == null) best = (move, score);
@@ -35,10 +35,18 @@ namespace TicTacToe
                     if (player == original)
                     {
                         if (score > best.score) best = (move, score);
+
+                        if (alpha < best.score) alpha = best.score;
+
+                        if (alpha >= beta) break;
                     }
                     else
                     {
                         if (score < best.score) best = (move, score);
+
+                        if (beta > best.score) beta = best.score;
+
+                        if (beta <= alpha) break;
                     }
                 }
             }
