@@ -38,8 +38,7 @@ namespace TicTacToe
         {
             winStates = new List<Coords[]>();
 
-            var winStateDiagonal = new Coords[BoardSize];
-            var winStateDiagonal2 = new Coords[BoardSize];
+            Coords[] winStateDiagonal = new Coords[BoardSize], winStateDiagonal2 = new Coords[BoardSize];
             for (int i = 0; i < BoardSize; i++)
             {
                 //Diagonals
@@ -47,8 +46,7 @@ namespace TicTacToe
                 winStateDiagonal2[i] = new Coords(i, BoardSize - 1 - i);
 
                 //Horizontals and Verticals
-                var winStateVertical = new Coords[BoardSize];
-                var winStateHorizontal = new Coords[BoardSize];
+                Coords[] winStateVertical = new Coords[BoardSize], winStateHorizontal = new Coords[BoardSize];
                 for (int j = 0; j < BoardSize; j++)
                 {
                     winStateVertical[j] = new Coords(i, j);
