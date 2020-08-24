@@ -9,7 +9,7 @@ namespace TicTacToe
     {
         public static (IMove move, int score) CalcNextMove(IGame game, char player)
         {
-            return AlphaBeta(game, player, player, 9, -100000000, 100000000);
+            return AlphaBeta(game, player, player, 9, int.MinValue, int.MaxValue);
         }
 
         public static (IMove move, int score) AlphaBeta(IGame game, char player, char original, int ply, int alpha, int beta)
