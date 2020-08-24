@@ -40,33 +40,26 @@ namespace TicTacToe
 
             for (int i = 0; i < BoardSize; i++)
             {
-                winStates.Add(new Coords[BoardSize]);
+                var winStateVertical = new Coords[BoardSize];
+                var winStateHorizontal = new Coords[BoardSize];
                 for (int j = 0; j < BoardSize; j++)
                 {
-                    winStates[winStates.Count - 1][j] = new Coords(i, j);
+                    winStateVertical[j] = new Coords(i, j);
+                    winStateHorizontal[j] = new Coords(j, i);
                 }
+                winStates.Add(winStateVertical);
+                winStates.Add(winStateHorizontal);
             }
 
+            var winStateDiagonal = new Coords[BoardSize];
+            var winStateDiagonal2 = new Coords[BoardSize];
             for (int i = 0; i < BoardSize; i++)
             {
-                winStates.Add(new Coords[BoardSize]);
-                for (int j = 0; j < BoardSize; j++)
-                {
-                    winStates[winStates.Count - 1][j] = new Coords(j, i);
-                }
+                winStateDiagonal[i] = new Coords(i, i);
+                winStateDiagonal2[i] = new Coords(i, BoardSize - 1 - i);
             }
-
-            winStates.Add(new Coords[BoardSize]);
-            for (int i = 0; i < BoardSize; i++)
-            {
-                winStates[winStates.Count - 1][i] = new Coords(i, i);
-            }
-
-            winStates.Add(new Coords[BoardSize]);
-            for (int i = 0; i < BoardSize; i++)
-            {
-                winStates[winStates.Count - 1][i] = new Coords(i, BoardSize - 1 - i);
-            }
+            winStates.Add(winStateDiagonal);
+            winStates.Add(winStateDiagonal2);
 
             return winStates;
         }
