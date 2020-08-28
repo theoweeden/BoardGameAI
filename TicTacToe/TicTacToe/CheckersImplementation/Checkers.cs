@@ -68,8 +68,28 @@ namespace TicTacToe
         public List<IMove> GetValidMoves(char player)
         {
             var moves = new List<IMove>();
-            
-            //TODO Implement
+
+            for (int x = 0; x < BoardSize; x++)
+            {
+                for (int y = 0; y < BoardSize; y++)
+                {
+                    if (Board[x, y].Contains(player))
+                    {
+                        var from = new Coords(x, y);
+                        for (int i = -1; i<=1; i+=2)
+                        {
+                            for (int j = -1; j <= 1; j += 2)
+                            {
+                                var move1 = new CheckersMove(from, new Coords(x + i, y + j), player);
+                                if(move1.IsValid(this)) moves.Add(move1);
+                                
+                                var move2 =new CheckersMove(from, new Coords(x + i * 2, y + j * 2), player);
+                                if (move2.IsValid(this)) moves.Add(move2);
+                            }
+                        }
+                    }
+                }
+            }
 
             return moves;
         }
