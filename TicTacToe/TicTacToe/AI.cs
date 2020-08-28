@@ -21,7 +21,7 @@ namespace TicTacToe
 
             (IMove move, int score) best = (null, 0);
 
-            var moves = game.GetValidMoves(player);
+            var moves = game.GetValidMoves(player).OrderByDescending(x=>x.Evaluate(game, player));
 
             foreach (var move in moves) { 
                 if (move.IsValid(game))

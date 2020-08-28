@@ -10,7 +10,7 @@ namespace TicTacToe
     {
         public char[,] Board { get; set; }
         public List<Coords[]> winStates { get; set; }
-        public const int BoardSize = 3;
+        public const int BoardSize = 4;
         public const int heuristicMultiplier = 100;
 
         public TicTacToe()

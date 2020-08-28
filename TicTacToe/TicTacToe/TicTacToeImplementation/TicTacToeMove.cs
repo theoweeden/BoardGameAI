@@ -36,5 +36,12 @@ namespace TicTacToe
             var tictactoe = game as TicTacToe;
             return !(tictactoe.IsWon('O') || tictactoe.IsWon('X') || Coords == null || Coords.x >= TicTacToe.BoardSize || Coords.y >= TicTacToe.BoardSize || tictactoe.Board[Coords.x, Coords.y] != ' ');
         }
+        public int Evaluate(IGame game, char player)
+        {
+            Execute(game);
+            var score = game.Evaluate(player);
+            Undo(game);
+            return score;
+        }
     }
 }
