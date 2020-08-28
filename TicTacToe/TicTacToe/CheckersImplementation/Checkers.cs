@@ -52,7 +52,22 @@ namespace TicTacToe
 
         public int Evaluate(char player)
         {
-            return 0;//TODO Implement
+            var score = 0;
+            var opponent = NextPlayer(player);
+            for (int x = 0; x < BoardSize; x++)
+            {
+                for (int y = 0; y < BoardSize; y++)
+                {
+                    var localScore = 0;
+                    if (Board[x, y].Contains(player)) localScore += heuristicMultiplier;
+                    else if (Board[x, y].Contains(opponent)) localScore -= heuristicMultiplier;
+
+                    if (Board[x, y].Contains('K')) localScore *= 3;
+
+                    score += localScore;
+                }
+            }
+            return score;
         }
 
         public char NextPlayer(char player)
