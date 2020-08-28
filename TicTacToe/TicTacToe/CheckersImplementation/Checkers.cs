@@ -38,7 +38,16 @@ namespace TicTacToe
         }
         public bool IsWon(char player)
         {
-            return false;//TODO Implement
+            var opponent = NextPlayer(player);
+            for (int x = 0; x < BoardSize; x++)
+            {
+                for (int y = 0; y < BoardSize; y++)
+                {
+                    if (Board[x, y].Contains(opponent)) return false;
+                }
+            }
+
+            return true;
         }
 
         public int Evaluate(char player)
