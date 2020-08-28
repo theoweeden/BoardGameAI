@@ -25,7 +25,16 @@ namespace TicTacToe
             {
                 for (int j = 0; j < BoardSize; j++)
                 {
-                    board[i, j] = " ";
+                    if ((i % 2 != 1 && j % 2 == 1 ||
+                        i % 2 == 1 && j % 2 != 1))
+                    {
+                        if (j <=2) board[i, j] = "W";
+                        else if (j >= 5) board[i, j] = "B";
+                        else board[i, j] = " ";
+                    }
+                    else { 
+                        board[i, j] = " "; 
+                    }
                 }
             }
 
