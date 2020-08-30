@@ -40,8 +40,8 @@ namespace TicTacToe
             if (!(game is Checkers)) return false;
             var checkers = game as Checkers;
             if ((checkers.IsWon()
-                || From == null || From.x >= TicTacToe.BoardSize || From.y >= TicTacToe.BoardSize
-                || To == null || To.x >= TicTacToe.BoardSize || To.y >= TicTacToe.BoardSize
+                || From == null || From.x >= TicTacToe.BoardSize || From.y >= TicTacToe.BoardSize || From.x <= 0|| From.y <= 0
+                || To == null || To.x >= TicTacToe.BoardSize || To.y >= TicTacToe.BoardSize || To.x <= 0 || To.y <= 0
                 || !checkers.Board[From.x, From.y].Contains(Player)
                 || checkers.Board[From.x, From.y] == " " || checkers.Board[To.x, To.y] != " ")) return false;
          
