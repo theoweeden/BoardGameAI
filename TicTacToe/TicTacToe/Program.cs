@@ -9,10 +9,10 @@ namespace TicTacToe
         {
             IGame t = new TicTacToe();
 
-            char player = 'X';
+            char player = TicTacToe.Player1;
             char opponent = t.NextPlayer(player);
             int x, y;
-            while (!t.IsWon('X') && !t.IsWon('O') && !t.IsWon() && t.GetValidMoves(player).Any())
+            while (!t.IsWon() && t.GetValidMoves(player).Any())
             {
                 Console.WriteLine(t.ToString());
                 do
