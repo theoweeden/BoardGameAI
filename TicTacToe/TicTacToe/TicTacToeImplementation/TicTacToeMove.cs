@@ -34,7 +34,7 @@ namespace TicTacToe
         {
             if (!(game is TicTacToe)) return false;
             var tictactoe = game as TicTacToe;
-            return !(tictactoe.IsWon('O') || tictactoe.IsWon('X') || Coords == null || Coords.x >= TicTacToe.BoardSize || Coords.y >= TicTacToe.BoardSize || tictactoe.Board[Coords.x, Coords.y] != ' ');
+            return !(tictactoe.IsWon() || Coords == null || Coords.x >= TicTacToe.BoardSize || Coords.y >= TicTacToe.BoardSize || tictactoe.Board[Coords.x, Coords.y] != ' ');
         }
     }
 }
