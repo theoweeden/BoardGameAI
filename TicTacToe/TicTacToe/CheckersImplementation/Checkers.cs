@@ -12,6 +12,9 @@ namespace TicTacToe
         public const int BoardSize = 8;
         public const int heuristicMultiplier = 100;
 
+        public const char Player1 = 'W';
+        public const char Player2 = 'B';
+
         public Checkers()
         {
             Board = initBoard();
@@ -28,8 +31,8 @@ namespace TicTacToe
                     if (i % 2 != 1 && j % 2 == 1 ||
                         i % 2 == 1 && j % 2 != 1)
                     {
-                        if (j <= 2) board[i, j] = "W";
-                        else if (j >= BoardSize - 3) board[i, j] = "B";
+                        if (j <= 2) board[i, j] = Player1.ToString();
+                        else if (j >= BoardSize - 3) board[i, j] = Player2.ToString();
                         else board[i, j] = " ";
                     }
                     else { 
@@ -43,7 +46,7 @@ namespace TicTacToe
 
         public bool IsWon()
         {
-            return IsWon('B') || IsWon('W');
+            return IsWon(Player1) || IsWon(Player2);
         }
         public bool IsWon(char player)
         {
@@ -83,8 +86,8 @@ namespace TicTacToe
         {
             return player switch
             {
-                'B' => 'W',
-                'W' => 'B',
+                Player1 => Player2,
+                Player2 => Player1,
                 _ => ' ',
             };
         }

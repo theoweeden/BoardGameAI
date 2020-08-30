@@ -39,7 +39,7 @@ namespace TicTacToe
         {
             if (!(game is Checkers)) return false;
             var checkers = game as Checkers;
-            if ((checkers.IsWon('B') || checkers.IsWon('W')
+            if ((checkers.IsWon()
                 || From == null || From.x >= TicTacToe.BoardSize || From.y >= TicTacToe.BoardSize
                 || To == null || To.x >= TicTacToe.BoardSize || To.y >= TicTacToe.BoardSize
                 || !checkers.Board[From.x, From.y].Contains(Player)
