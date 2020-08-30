@@ -10,7 +10,7 @@ namespace TicTacToe
         public Coords To { get; set; }
         public char Player { get; set; }
 
-        public CheckersMove(Coords from,Coords to,char player)
+        public CheckersMove(Coords from, Coords to, char player)
         {
             From = from;
             To = to;
@@ -39,13 +39,13 @@ namespace TicTacToe
         {
             if (!(game is Checkers)) return false;
             var checkers = game as Checkers;
-            if ((checkers.IsWon()
-                || From == null || From.x >= TicTacToe.BoardSize || From.y >= TicTacToe.BoardSize || From.x < 0|| From.y < 0
-                || To == null || To.x >= TicTacToe.BoardSize || To.y >= TicTacToe.BoardSize || To.x < 0 || To.y < 0
-                || !checkers.Board[From.x, From.y].Contains(Player)
-                || checkers.Board[From.x, From.y] == " " || checkers.Board[To.x, To.y] != " ")) return false;
+            if (checkers.IsWon()) return false;
+            if (From == null || From.x >= Checkers.BoardSize || From.y >= Checkers.BoardSize || From.x < 0|| From.y < 0) return false;
+            if (To == null || To.x >= Checkers.BoardSize || To.y >= Checkers.BoardSize || To.x < 0 || To.y < 0) return false;
+            if (!checkers.Board[From.x, From.y].Contains(Player)
+                || checkers.Board[From.x, From.y] == " " || checkers.Board[To.x, To.y] != " ") return false;
+
          
-            
             return true;
         }
     }
