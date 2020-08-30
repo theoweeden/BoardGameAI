@@ -11,12 +11,15 @@ namespace TicTacToe
         public char Player { get; set; }
 
         private string PieceTaken { get; set; }
+        private Coords Between { get; set; }
 
         public CheckersMove(Coords from, Coords to, char player)
         {
             From = from;
             To = to;
             Player = player;
+
+            if (Math.Abs(To.x - From.x) == 2 && Math.Abs(To.y - From.y) == 2) Between = new Coords((To.x + From.x) / 2, (To.y + From.y) / 2);
         }
 
         public bool Execute(IGame game)
@@ -30,8 +33,8 @@ namespace TicTacToe
 
             if (Math.Abs(To.x - From.x) == 2 && Math.Abs(To.y - From.y) == 2)
             {
-                PieceTaken = checkers.Board[(To.x + From.x) / 2, (To.y + From.y) / 2];
-                checkers.Board[(To.x + From.x) / 2, (To.y + From.y) / 2] = " ";
+                PieceTaken = checkers.Board[Between.x, Between.y];
+                checkers.Board[Between.x, Between.y] = " ";
             }
             return true;
         }
@@ -44,7 +47,7 @@ namespace TicTacToe
             checkers.Board[To.x, To.y] = " ";
 
             if (Math.Abs(To.x - From.x) == 2 && Math.Abs(To.y - From.y) == 2)
-                checkers.Board[(To.x + From.x) / 2, (To.y + From.y) / 2] = PieceTaken;
+                checkers.Board[Between.x, Between.y] = PieceTaken;
         }
         public bool IsValid(IGame game)
         {
@@ -62,7 +65,7 @@ namespace TicTacToe
             if (Player == Checkers.Player2 && To.y >= From.y) return false;
 
             if (!((Math.Abs(To.x - From.x) == 1 && Math.Abs(To.y - From.y) == 1)
-                || (Math.Abs(To.x - From.x) == 2 && Math.Abs(To.y - From.y) == 2 && checkers.Board[(To.x + From.x) / 2, (To.y + From.y) / 2].Contains(checkers.NextPlayer(Player))))) return false;
+                || (Math.Abs(To.x - From.x) == 2 && Math.Abs(To.y - From.y) == 2 && checkers.Board[Between.x, Between.y].Contains(checkers.NextPlayer(Player))))) return false;
 
             return true;
         }
