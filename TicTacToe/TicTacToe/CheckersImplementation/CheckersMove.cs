@@ -10,6 +10,8 @@ namespace TicTacToe
         public Coords To { get; set; }
         public char Player { get; set; }
 
+        private string PieceTaken { get; set; }
+
         public CheckersMove(Coords from, Coords to, char player)
         {
             From = from;
@@ -26,9 +28,11 @@ namespace TicTacToe
             checkers.Board[To.x, To.y] = checkers.Board[From.x, From.y];
             checkers.Board[From.x, From.y] = " ";
 
-            if (Math.Abs(To.x - From.x) == 2 && Math.Abs(To.y - From.y) == 2) 
+            if (Math.Abs(To.x - From.x) == 2 && Math.Abs(To.y - From.y) == 2)
+            {
+                PieceTaken = checkers.Board[(To.x + From.x) / 2, (To.y + From.y) / 2];
                 checkers.Board[(To.x + From.x) / 2, (To.y + From.y) / 2] = " ";
-
+            }
             return true;
         }
         public void Undo(IGame game)
@@ -40,7 +44,7 @@ namespace TicTacToe
             checkers.Board[To.x, To.y] = " ";
 
             if (Math.Abs(To.x - From.x) == 2 && Math.Abs(To.y - From.y) == 2)
-                checkers.Board[(To.x + From.x) / 2, (To.y + From.y) / 2] = checkers.NextPlayer(Player).ToString();//TODO Reimplement
+                checkers.Board[(To.x + From.x) / 2, (To.y + From.y) / 2] = PieceTaken;
         }
         public bool IsValid(IGame game)
         {
