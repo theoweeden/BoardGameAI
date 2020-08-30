@@ -28,8 +28,8 @@ namespace TicTacToe
                     if (i % 2 != 1 && j % 2 == 1 ||
                         i % 2 == 1 && j % 2 != 1)
                     {
-                        if (j <=2) board[i, j] = "W";
-                        else if (j >= 5) board[i, j] = "B";
+                        if (j <= 2) board[i, j] = "W";
+                        else if (j >= BoardSize - 3) board[i, j] = "B";
                         else board[i, j] = " ";
                     }
                     else { 
