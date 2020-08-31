@@ -8,23 +8,21 @@ namespace TicTacToe
 {
     class Checkers : IGame
     {
-        public string[,] Board { get; set; }
+        public CheckersPiece[,] Board { get; set; }
         public const int BoardSize = 8;
         public const int heuristicMultiplier = 100;
 
         public const char Player1 = 'W';
         public const char Player2 = 'B';
 
-        public const char KingMarker = 'K';
-
         public Checkers()
         {
             Board = initBoard();
         }
 
-        public string[,] initBoard()
+        public CheckersPiece[,] initBoard()
         {
-            var board = new string[BoardSize, BoardSize];
+            var board = new CheckersPiece[BoardSize, BoardSize];
 
             for (int i = 0; i < BoardSize; i++)
             {
@@ -33,12 +31,12 @@ namespace TicTacToe
                     if (i % 2 != 1 && j % 2 == 1 ||
                         i % 2 == 1 && j % 2 != 1)
                     {
-                        if (j <= 2) board[i, j] = Player1.ToString();
-                        else if (j >= BoardSize - 3) board[i, j] = Player2.ToString();
-                        else board[i, j] = " ";
+                        if (j <= 2) board[i, j] = new CheckersPiece(Player1, false);
+                        else if (j >= BoardSize - 3) board[i, j] = new CheckersPiece(Player2, false);
+                        else board[i, j] = null;
                     }
                     else { 
-                        board[i, j] = " "; 
+                        board[i, j] = null; 
                     }
                 }
             }
@@ -57,7 +55,7 @@ namespace TicTacToe
             {
                 for (int y = 0; y < BoardSize; y++)
                 {
-                    if (Board[x, y].Contains(opponent)) return false;
+                    if (Board[x, y] != null && Board[x, y].Player == opponent) return false;
                 }
             }
 
@@ -72,13 +70,16 @@ namespace TicTacToe
             {
                 for (int y = 0; y < BoardSize; y++)
                 {
-                    var localScore = 0;
-                    if (Board[x, y].Contains(player)) localScore += heuristicMultiplier;
-                    else if (Board[x, y].Contains(opponent)) localScore -= heuristicMultiplier;
+                    if (Board[x, y] != null)
+                    {
+                        var localScore = 0;
+                        if (Board[x, y].Player == player) localScore += heuristicMultiplier;
+                        else if (Board[x, y].Player == opponent) localScore -= heuristicMultiplier;
 
-                    if (Board[x, y].Contains(KingMarker)) localScore *= 3;
+                        if (Board[x, y].King) localScore *= 3;
 
-                    score += localScore;
+                        score += localScore;
+                    }
                 }
             }
             return score;
@@ -102,17 +103,17 @@ namespace TicTacToe
             {
                 for (int y = 0; y < BoardSize; y++)
                 {
-                    if (Board[x, y].Contains(player))
+                    if (Board[x, y] != null && Board[x, y].Player == player)
                     {
                         var from = new Coords(x, y);
                         for (int i = -1; i<=1; i+=2)
                         {
                             for (int j = -1; j <= 1; j += 2)
                             {
-                                var move1 = new CheckersMove(from, new Coords(x + i, y + j), player, Board[x,y]);
+                                var move1 = new CheckersMove(from, new Coords(x + i, y + j), player);
                                 if(move1.IsValid(this)) moves.Add(move1);
                                 
-                                var move2 =new CheckersMove(from, new Coords(x + i * 2, y + j * 2), player, Board[x, y]);
+                                var move2 =new CheckersMove(from, new Coords(x + i * 2, y + j * 2), player);
                                 if (move2.IsValid(this)) moves.Add(move2);
                             }
                         }
@@ -131,9 +132,9 @@ namespace TicTacToe
                 sb.Append("|");
                 for (int x = 0; x < BoardSize; x++)
                 {
-                    var c = Board[x, y].Last();
+                        var c = Board[x, y]?.Player ?? ' ';
 
-                    if (!Board[x, y].Contains(KingMarker)) c = char.ToLower(c);
+                        if (!Board[x, y]?.King ?? false) c = char.ToLower(c);
 
                     sb.Append(c + "|");
                 }

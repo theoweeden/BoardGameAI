@@ -39,7 +39,7 @@ namespace TicTacToe
                         Console.WriteLine("Choose the Y coordinate for your move:");
                     } while (!Int32.TryParse(Console.ReadLine(), out y2));
 
-                } while (!(new CheckersMove(new Coords(x1, y1), new Coords(x2, y2), player, (g as Checkers).Board[x1, y1]).Execute(g)));
+                } while (!(new CheckersMove(new Coords(x1, y1), new Coords(x2, y2), player).Execute(g)));
 
                 var move = AI.CalcNextMove(g, opponent).move;
                 if (move != null) move.Execute(g);
