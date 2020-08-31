@@ -72,7 +72,7 @@ namespace TicTacToe
 
             if (To.x == From.x || To.y == From.y) return false;
 
-            if (checkers.Board[From.x, From.y].King)
+            if (!checkers.Board[From.x, From.y].King)
             {
                 if (Player == Checkers.Player1 && To.y <= From.y) return false;
                 if (Player == Checkers.Player2 && To.y >= From.y) return false;
