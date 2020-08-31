@@ -33,7 +33,7 @@ namespace TicTacToe
             checkers.Board[To.x, To.y] = checkers.Board[From.x, From.y];
             checkers.Board[From.x, From.y] = null;
 
-            if (Math.Abs(To.x - From.x) == 2 && Math.Abs(To.y - From.y) == 2)
+            if (Between != null)
             {
                 PieceTaken = checkers.Board[Between.x, Between.y];
                 checkers.Board[Between.x, Between.y] = null;
@@ -54,8 +54,7 @@ namespace TicTacToe
             checkers.Board[From.x, From.y] = checkers.Board[To.x, To.y];
             checkers.Board[To.x, To.y] = null;
 
-            if (Math.Abs(To.x - From.x) == 2 && Math.Abs(To.y - From.y) == 2)
-                checkers.Board[Between.x, Between.y] = PieceTaken;
+            if (Between != null) checkers.Board[Between.x, Between.y] = PieceTaken;
 
             if (Promoted) checkers.Board[From.x, From.y].King = false;
         }
@@ -63,9 +62,12 @@ namespace TicTacToe
         {
             if (!(game is Checkers)) return false;
             var checkers = game as Checkers;
+
             if (checkers.IsWon()) return false;
+
             if (From == null || From.x >= Checkers.BoardSize || From.y >= Checkers.BoardSize || From.x < 0|| From.y < 0) return false;
             if (To == null || To.x >= Checkers.BoardSize || To.y >= Checkers.BoardSize || To.x < 0 || To.y < 0) return false;
+
             if (checkers.Board[From.x, From.y] == null || checkers.Board[From.x, From.y].Player != (Player) || checkers.Board[To.x, To.y] != null) return false;
 
             if (To.x == From.x || To.y == From.y) return false;
@@ -77,7 +79,7 @@ namespace TicTacToe
             }
 
             if (!((Math.Abs(To.x - From.x) == 1 && Math.Abs(To.y - From.y) == 1)
-                || (Math.Abs(To.x - From.x) == 2 && Math.Abs(To.y - From.y) == 2 && checkers.Board[Between.x, Between.y] != null && checkers.Board[Between.x, Between.y].Player == (checkers.NextPlayer(Player))))) return false;
+                || (Between != null && checkers.Board[Between.x, Between.y] != null && checkers.Board[Between.x, Between.y].Player == (checkers.NextPlayer(Player))))) return false;
 
             return true;
         }
