@@ -41,7 +41,7 @@ namespace TicTacToe
 
                 } while (!(new CheckersMove(new Coords(x1, y1), new Coords(x2, y2), player).Execute(g)));
 
-                var move = AI.CalcNextMove(g, opponent).move;
+                var move = AI.CalcNextMove(g, opponent, 5).move;
                 if (move != null) move.Execute(g);
             }
 
