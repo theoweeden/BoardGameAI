@@ -13,6 +13,9 @@ namespace TicTacToe
         public const int BoardSize = 4;
         public const int heuristicMultiplier = 100;
 
+        public const char Player1 = 'X';
+        public const char Player2 = 'O';
+
         public TicTacToe()
         {
             Board = initBoard();
@@ -64,7 +67,7 @@ namespace TicTacToe
 
         public bool IsWon()
         {
-            return IsWon('O') || IsWon('X');
+            return IsWon(Player1) || IsWon(Player2);
         }
         public bool IsWon(char player)
         {
@@ -81,8 +84,8 @@ namespace TicTacToe
         {
             return player switch
             {
-                'O' => 'X',
-                'X' => 'O',
+                Player1 => Player2,
+                Player2 => Player1,
                 _ => ' ',
             };
         }

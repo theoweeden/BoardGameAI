@@ -7,9 +7,9 @@ namespace TicTacToe
 {
     class AI
     {
-        public static (IMove move, int score) CalcNextMove(IGame game, char player)
+        public static (IMove move, int score) CalcNextMove(IGame game, char player, int ply)
         {
-            return AlphaBeta(game, player, player, 9, int.MinValue, int.MaxValue);
+            return AlphaBeta(game, player, player, ply, int.MinValue, int.MaxValue);
         }
 
         public static (IMove move, int score) AlphaBeta(IGame game, char player, char original, int ply, int alpha, int beta)
