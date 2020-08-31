@@ -132,9 +132,8 @@ namespace TicTacToe
                 sb.Append("|");
                 for (int x = 0; x < BoardSize; x++)
                 {
-                        var c = Board[x, y]?.Player ?? ' ';
-
-                        if (!Board[x, y]?.King ?? false) c = char.ToLower(c);
+                    var c = Board[x, y]?.Player ?? ' ';
+                    if (!Board[x, y]?.King ?? false) c = char.ToLower(c);
 
                     sb.Append(c + "|");
                 }
