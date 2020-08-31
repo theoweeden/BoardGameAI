@@ -83,5 +83,12 @@ namespace TicTacToe
 
             return true;
         }
+        public int Evaluate(IGame game, char player)
+        {
+            Execute(game);
+            var score = game.Evaluate(player);
+            Undo(game);
+            return score;
+        }
     }
 }
