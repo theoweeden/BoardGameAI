@@ -39,7 +39,7 @@ namespace TicTacToe
                 checkers.Board[Between.x, Between.y] = null;
             }
 
-            if (((Player == Checkers.Player1 && To.y == Checkers.BoardSize) || (Player == Checkers.Player2 && To.y == 0)) && !checkers.Board[To.x, To.y].King) {
+            if (((Player == Checkers.Player1 && To.y == Checkers.BoardSize - 1) || (Player == Checkers.Player2 && To.y == 0)) && !checkers.Board[To.x, To.y].King) {
                 checkers.Board[To.x, To.y].King = true;
                 Promoted = true;
             }
