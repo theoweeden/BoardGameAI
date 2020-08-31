@@ -15,6 +15,8 @@ namespace TicTacToe
         public const char Player1 = 'W';
         public const char Player2 = 'B';
 
+        public const char KingMarker = 'K';
+
         public Checkers()
         {
             Board = initBoard();
@@ -74,7 +76,7 @@ namespace TicTacToe
                     if (Board[x, y].Contains(player)) localScore += heuristicMultiplier;
                     else if (Board[x, y].Contains(opponent)) localScore -= heuristicMultiplier;
 
-                    if (Board[x, y].Contains('K')) localScore *= 3;
+                    if (Board[x, y].Contains(KingMarker)) localScore *= 3;
 
                     score += localScore;
                 }
@@ -107,10 +109,10 @@ namespace TicTacToe
                         {
                             for (int j = -1; j <= 1; j += 2)
                             {
-                                var move1 = new CheckersMove(from, new Coords(x + i, y + j), player);
+                                var move1 = new CheckersMove(from, new Coords(x + i, y + j), player, Board[x,y]);
                                 if(move1.IsValid(this)) moves.Add(move1);
                                 
-                                var move2 =new CheckersMove(from, new Coords(x + i * 2, y + j * 2), player);
+                                var move2 =new CheckersMove(from, new Coords(x + i * 2, y + j * 2), player, Board[x, y]);
                                 if (move2.IsValid(this)) moves.Add(move2);
                             }
                         }

@@ -10,14 +10,18 @@ namespace TicTacToe
         public Coords To { get; set; }
         public char Player { get; set; }
 
-        private string PieceTaken { get; set; }
+        public string Piece { get; set; }
         private Coords Between { get; set; }
 
-        public CheckersMove(Coords from, Coords to, char player)
+        private string PieceTaken { get; set; }
+        private bool Promoted { get; set; }
+
+        public CheckersMove(Coords from, Coords to, char player, string piece)
         {
             From = from;
             To = to;
             Player = player;
+            Piece = piece;
 
             if (Math.Abs(To.x - From.x) == 2 && Math.Abs(To.y - From.y) == 2) Between = new Coords((To.x + From.x) / 2, (To.y + From.y) / 2);
         }
@@ -36,6 +40,12 @@ namespace TicTacToe
                 PieceTaken = checkers.Board[Between.x, Between.y];
                 checkers.Board[Between.x, Between.y] = " ";
             }
+
+            if (((Player == Checkers.Player1 && To.y == Checkers.BoardSize) || (Player == Checkers.Player2 && To.y == 0)) && !Piece.Contains(Checkers.KingMarker)) { 
+                checkers.Board[To.x, To.y] = Checkers.KingMarker.ToString() + Player.ToString();
+                Promoted = true;
+            }
+
             return true;
         }
         public void Undo(IGame game)
@@ -48,6 +58,8 @@ namespace TicTacToe
 
             if (Math.Abs(To.x - From.x) == 2 && Math.Abs(To.y - From.y) == 2)
                 checkers.Board[Between.x, Between.y] = PieceTaken;
+
+            if (Promoted) checkers.Board[From.x, From.y] = Piece;
         }
         public bool IsValid(IGame game)
         {
@@ -61,8 +73,11 @@ namespace TicTacToe
 
             if (To.x == From.x || To.y == From.y) return false;
 
-            if (Player == Checkers.Player1 && To.y <= From.y) return false;
-            if (Player == Checkers.Player2 && To.y >= From.y) return false;
+            if (!Piece.Contains(Checkers.KingMarker))
+            {
+                if (Player == Checkers.Player1 && To.y <= From.y) return false;
+                if (Player == Checkers.Player2 && To.y >= From.y) return false;
+            }
 
             if (!((Math.Abs(To.x - From.x) == 1 && Math.Abs(To.y - From.y) == 1)
                 || (Math.Abs(To.x - From.x) == 2 && Math.Abs(To.y - From.y) == 2 && checkers.Board[Between.x, Between.y].Contains(checkers.NextPlayer(Player))))) return false;
