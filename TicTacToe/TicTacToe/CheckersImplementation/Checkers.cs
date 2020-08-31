@@ -131,7 +131,11 @@ namespace TicTacToe
                 sb.Append("|");
                 for (int x = 0; x < BoardSize; x++)
                 {
-                    sb.Append(Board[x, y] + "|");
+                    var c = Board[x, y].Last();
+
+                    if (!Board[x, y].Contains(KingMarker)) c = char.ToLower(c);
+
+                    sb.Append(c + "|");
                 }
                 sb.AppendLine();
             }
